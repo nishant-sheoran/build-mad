@@ -152,7 +152,9 @@ Beyond the core requirements, we added:
 5. **Mobile Responsiveness:** Works perfectly on all device sizes
 6. **Accessibility:** Proper labels, semantic HTML, and keyboard navigation
 
-## 📱 Screenshots/Preview
+## 📱 Preview
+
+<img width="579" height="668" alt="image" src="https://github.com/user-attachments/assets/f243121a-2f23-442f-8af4-454d70307cb9" />
 
 The login form features:
 - Beautiful gradient background
