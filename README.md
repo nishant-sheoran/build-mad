@@ -58,17 +58,7 @@ This repository showcases practical implementations of modern web development te
   - Sound effects and animations
 - **Skills Demonstrated**: Game development, array operations, educational programming
 
-### 7. **P8_react** - React User Registration & Counter App
-- **Technology**: React 18, JavaScript ES6+, CSS3
-- **Features**:
-  - User registration form with validation
-  - React state management with useState
-  - Counter app with component communication
-  - Props passing between components
-  - Modern responsive design
-- **Skills Demonstrated**: React fundamentals, component architecture, state management
-
-### 8. **P8_sql** - Comprehensive SQL Operations
+### 7. **P8_sql** - Comprehensive SQL Operations
 - **Technology**: SQL (MySQL compatible)
 - **Features**:
   - Complete DDL, DML, DCL, and TCL commands
@@ -77,6 +67,16 @@ This repository showcases practical implementations of modern web development te
   - SET operations (UNION, INTERSECT, MINUS)
   - Transaction management and data control
 - **Skills Demonstrated**: Database design, SQL queries, data manipulation, transaction control
+
+### 8. **P9_react** - React User Registration & Counter App
+- **Technology**: React 18, JavaScript ES6+, CSS3
+- **Features**:
+  - User registration form with validation
+  - React state management with useState
+  - Counter app with component communication
+  - Props passing between components
+  - Modern responsive design
+- **Skills Demonstrated**: React fundamentals, component architecture, state management
 
 ## Technologies Used
 
@@ -106,8 +106,8 @@ This repository showcases practical implementations of modern web development te
 ├── P4_interactive_flip_card/         # 3D flip card animations
 ├── P6_todo/                          # Modern todo application
 ├── P7_array_heist/                   # Educational array game
-├── P8_react/                         # React form and counter app
 ├── P8_sql/                           # SQL operations demonstration
+|── P9_react/                         # React form and counter app
 └── README.md                         # This file
 ```
 
