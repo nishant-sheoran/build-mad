@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Todo App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="app-title">
+                <i class="fas fa-tasks"></i>
+                Todo App
+            </h1>
+            <p class="app-subtitle">Stay organized and productive</p>
+        </header>
+
+        <!-- Todo Input Section -->
+        <section class="todo-input-section">
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    id="todoInput" 
+                    class="todo-input" 
+                    placeholder="What needs to be done?"
+                    maxlength="100"
+                >
+                <button id="addBtn" class="add-btn">
+                    <i class="fas fa-plus"></i>
+                    Add Task
+                </button>
+            </div>
+        </section>
+
+        <!-- Filter and Search Section -->
+        <section class="filter-section">
+            <div class="filter-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search tasks..."
+                    >
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-list"></i>
+                        All
+                    </button>
+                    <button class="filter-btn" data-filter="active">
+                        <i class="fas fa-clock"></i>
+                        Active
+                    </button>
+                    <button class="filter-btn" data-filter="completed">
+                        <i class="fas fa-check"></i>
+                        Completed
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalTasks">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="activeTasks">0</span>
+                    <span class="stat-label">Active</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="completedTasks">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="completionRate">0%</span>
+                    <span class="stat-label">Done</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Todo List Section -->
+        <section class="todo-list-section">
+            <div class="todo-list-container">
+                <div id="todoList" class="todo-list">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+                <div id="emptyState" class="empty-state">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>No tasks yet</h3>
+                    <p>Add your first task to get started!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bulk Actions Section -->
+        <section class="bulk-actions-section" id="bulkActions" style="display: none;">
+            <div class="bulk-actions-container">
+                <span class="bulk-text">
+                    <span id="selectedCount">0</span> tasks selected
+                </span>
+                <div class="bulk-buttons">
+                    <button id="markAllComplete" class="bulk-btn complete-btn">
+                        <i class="fas fa-check"></i>
+                        Mark Complete
+                    </button>
+                    <button id="markAllActive" class="bulk-btn active-btn">
+                        <i class="fas fa-undo"></i>
+                        Mark Active
+                    </button>
+                    <button id="deleteSelected" class="bulk-btn delete-btn">
+                        <i class="fas fa-trash"></i>
+                        Delete Selected
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Actions -->
+        <footer class="footer-actions">
+            <div class="footer-container">
+                <button id="clearCompleted" class="footer-btn">
+                    <i class="fas fa-broom"></i>
+                    Clear Completed
+                </button>
+                <button id="exportTasks" class="footer-btn">
+                    <i class="fas fa-download"></i>
+                    Export
+                </button>
+                <button id="importTasks" class="footer-btn">
+                    <i class="fas fa-upload"></i>
+                    Import
+                </button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+            </div>
+        </footer>
+    </div>
+
+    <!-- Task Template (Hidden) -->
+    <template id="taskTemplate">
+        <div class="todo-item" data-id="">
+            <div class="task-content">
+                <div class="task-checkbox">
+                    <input type="checkbox" class="task-check">
+                    <span class="checkmark">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+                <div class="task-text-container">
+                    <span class="task-text"></span>
+                    <div class="task-meta">
+                        <span class="task-date"></span>
+                        <span class="task-priority"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="task-actions">
+                <button class="task-btn edit-btn" title="Edit task">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="task-btn delete-btn" title="Delete task">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <button class="task-btn priority-btn" title="Change priority">
+                    <i class="fas fa-flag"></i>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Task</h3>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="editInput" class="edit-input" placeholder="Edit task...">
+                <div class="priority-selector">
+                    <label>Priority:</label>
+                    <select id="prioritySelect">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveEdit" class="modal-btn save-btn">Save</button>
+                <button id="cancelEdit" class="modal-btn cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

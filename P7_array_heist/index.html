@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Breaker - The Array Heist</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1 class="game-title">
+                <i class="fas fa-lock"></i>
+                Code Breaker
+                <span class="subtitle">The Array Heist</span>
+            </h1>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="currentLevel">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time</span>
+                    <span class="stat-value" id="timer">60</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mission Brief -->
+        <section class="mission-brief">
+            <div class="brief-container">
+                <h2>Mission Brief</h2>
+                <p id="missionText">Find the secret pattern hidden in the array. Use insert, delete, and search operations to crack the code!</p>
+                <div class="secret-pattern">
+                    <span>Secret Pattern: </span>
+                    <div id="secretPattern" class="pattern-display"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Array Display -->
+        <section class="array-section">
+            <div class="array-container">
+                <h3>Digital Vault Array</h3>
+                <div class="array-display" id="arrayDisplay">
+                    <!-- Array cells will be generated here -->
+                </div>
+                <div class="array-indices">
+                    <!-- Index labels will be generated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Operations Panel -->
+        <section class="operations-panel">
+            <div class="panel-container">
+                <h3>Hacker Tools</h3>
+                
+                <!-- Insert Operation -->
+                <div class="operation-group">
+                    <h4><i class="fas fa-plus-circle"></i> Insert</h4>
+                    <div class="input-group">
+                        <input type="number" id="insertIndex" placeholder="Index (0-9)" min="0" max="9">
+                        <input type="number" id="insertValue" placeholder="Value (0-9)" min="0" max="9">
+                        <button id="insertBtn" class="operation-btn insert-btn">
+                            <i class="fas fa-plus"></i> Insert
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Delete Operation -->
+                <div class="operation-group">
+                    <h4><i class="fas fa-minus-circle"></i> Delete</h4>
+                    <div class="input-group">
+                        <input type="number" id="deleteIndex" placeholder="Index (0-9)" min="0" max="9">
+                        <button id="deleteBtn" class="operation-btn delete-btn">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Operation -->
+                <div class="operation-group">
+                    <h4><i class="fas fa-search"></i> Search Pattern</h4>
+                    <div class="input-group">
+                        <input type="text" id="searchPattern" placeholder="Pattern (e.g., 2,1,4)">
+                        <button id="searchBtn" class="operation-btn search-btn">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="control-buttons">
+                    <button id="resetBtn" class="control-btn reset-btn">
+                        <i class="fas fa-redo"></i> Reset Array
+                    </button>
+                    <button id="autoFillBtn" class="control-btn autofill-btn">
+                        <i class="fas fa-magic"></i> Auto Fill
+                    </button>
+                    <button id="nextLevelBtn" class="control-btn nextlevel-btn" style="display: none;">
+                        <i class="fas fa-arrow-right"></i> Next Level
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Panel -->
+        <section class="feedback-panel">
+            <div class="feedback-container">
+                <div id="feedbackMessage" class="feedback-message">
+                    Welcome, hacker! Start by inserting some digits into the array.
+                </div>
+                <div class="operation-history" id="operationHistory">
+                    <!-- Operation history will be displayed here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Over Modal -->
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="gameOverTitle">Level Complete!</h2>
+                    <button class="modal-close" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="gameOverMessage" class="game-over-message">
+                        Congratulations! You cracked the code!
+                    </div>
+                    <div class="game-stats-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Time Taken:</span>
+                            <span class="summary-value" id="timeTaken">0s</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Operations Used:</span>
+                            <span class="summary-value" id="operationsUsed">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Score:</span>
+                            <span class="summary-value" id="finalScore">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="playAgainBtn" class="modal-btn primary-btn">Play Again</button>
+                    <button id="nextLevelModalBtn" class="modal-btn secondary-btn">Next Level</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Selection Modal -->
+        <div id="levelModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Select Level</h2>
+                    <button class="modal-close" id="closeLevelModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="level-grid">
+                        <div class="level-card" data-level="1">
+                            <h3>Level 1</h3>
+                            <p>Find a 2-digit pattern</p>
+                            <div class="level-difficulty easy">Easy</div>
+                        </div>
+                        <div class="level-card" data-level="2">
+                            <h3>Level 2</h3>
+                            <p>Find a 3-digit pattern</p>
+                            <div class="level-difficulty medium">Medium</div>
+                        </div>
+                        <div class="level-card" data-level="3">
+                            <h3>Level 3</h3>
+                            <p>Find a reverse pattern</p>
+                            <div class="level-difficulty hard">Hard</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

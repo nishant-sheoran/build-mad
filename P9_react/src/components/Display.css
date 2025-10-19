@@ -1,0 +1,175 @@
+/* Display.css - Display component styles */
+
+.display {
+  background: #fff;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.display h4 {
+  color: #495057;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.count-display {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.count-value {
+  font-size: 4rem;
+  font-weight: 700;
+  font-family: 'Inter', monospace;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  border: 3px solid currentColor;
+  transition: all 0.3s ease;
+  animation: countPulse 0.5s ease;
+}
+
+@keyframes countPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.count-info {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.count-status {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.count-description {
+  color: #6c757d;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.count-visual {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+}
+
+.count-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation: dotAppear 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes dotAppear {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.zero-indicator {
+  color: #6c757d;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px dashed #dee2e6;
+}
+
+/* Color variations for different count ranges */
+.count-value.positive {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.count-value.negative {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.count-value.zero {
+  color: #007bff;
+  border-color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .display {
+    padding: 1.5rem;
+  }
+  
+  .count-value {
+    font-size: 3rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .count-visual {
+    min-height: 50px;
+  }
+  
+  .count-dot {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .display {
+    padding: 1rem;
+  }
+  
+  .count-value {
+    font-size: 2.5rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .count-visual {
+    min-height: 40px;
+    gap: 0.3rem;
+  }
+  
+  .count-dot {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .count-status {
+    font-size: 1rem;
+  }
+}

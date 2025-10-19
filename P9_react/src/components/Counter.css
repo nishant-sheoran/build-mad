@@ -1,0 +1,169 @@
+/* Counter.css - Counter component styles */
+
+.counter {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border: 1px solid #e9ecef;
+}
+
+.counter h3 {
+  color: #495057;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.counter-controls {
+  margin: 2rem 0;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.counter-btn {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  min-width: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.counter-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.counter-btn:hover:before {
+  left: 100%;
+}
+
+.counter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.counter-btn:active {
+  transform: translateY(0);
+}
+
+.decrement-five {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.decrement-five:hover {
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.decrement {
+  background: linear-gradient(135deg, #fd7e14, #e8590c);
+  color: white;
+}
+
+.decrement:hover {
+  box-shadow: 0 4px 12px rgba(253, 126, 20, 0.4);
+}
+
+.reset {
+  background: linear-gradient(135deg, #6c757d, #5a6268);
+  color: white;
+  font-weight: 700;
+}
+
+.reset:hover {
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+}
+
+.increment {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.increment:hover {
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+.increment-five {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+}
+
+.increment-five:hover {
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.counter-info {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+  text-align: left;
+}
+
+.counter-info p {
+  margin-bottom: 0.8rem;
+  color: #495057;
+  line-height: 1.6;
+}
+
+.counter-info p:last-child {
+  margin-bottom: 0;
+}
+
+.counter-info strong {
+  color: #212529;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .counter {
+    padding: 1.5rem;
+  }
+  
+  .button-row {
+    gap: 0.5rem;
+  }
+  
+  .counter-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    min-width: 50px;
+  }
+  
+  .counter-info {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .counter-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
